@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="docker-toolbox" basedir=".">
+
+  <dirname property="app.basedir" file="${ant.file.docker-toolbox}"/>
+  <property name="build.properties" value="${app.basedir}/build.properties"/>
+  <property file="${build.properties}"/>
+
+  <!-- Load Portapps core build -->
+  <property name="core.basedir" location="${app.basedir}\${core.dir}"/>
+  <fail unless="core.basedir" message="Core directory '${core.basedir}' not found in ${core.basedir}"/>
+  <echo message="Core found in ${core.basedir}" level="debug"/>
+
+  <!-- Import build-app.xml  -->
+  <import file="${core.basedir}\.build\build-app.xml"/>
+
+  <!-- Targets -->
+  <target name="release" depends="release.app" description="Release"/>
+
+  <target name="prepare">
+    <echo message="Preparing release..."/>
+    <property name="extract.path2" value="${tmp.path}\extract2"/>
+    <move todir="${tmp.path}\extract2">
+      <fileset dir="${extract.path}\${innosetup.app}">
+        <exclude name="installers/**"/>
+        <exclude name="kitematic/**"/>
+      </fileset>
+    </move>
+
+    <echo message="Downloading Git ${papp.git.version}..."/>
+    <property name="papp.git.file" location="${tmp.path}\PortableGit-${papp.git.version}.7z.exe"/>
+    <get dest="${papp.git.file}" src="${papp.git.url}" skipexisting="false"/>
+
+    <echo message="Extracting Git..."/>
+    <sevenzip-ax src="${papp.git.file}" dest="${extract.path2}\git"/>
+
+    <echo message="Updating post-install.bat for Git..."/>
+    <assertfile file="${extract.path2}\git\post-install.bat"/>
+    <replace file="${extract.path2}\git\post-install.bat">
+      <replacefilter token="@DEL post-install.bat" value="@REM @DEL post-install.bat"/>
+    </replace>
+
+    <echo message="Copying custom start.sh"/>
+    <copy file="${res.path}\start.sh" todir="${extract.path2}" overwrite="true"/>
+
+    <delete dir="${extract.path}\${innosetup.app}"/>
+    <move todir="${extract.path}\${innosetup.app}">
+      <fileset dir="${extract.path2}"/>
+    </move>
+  </target>
+
+</project>
