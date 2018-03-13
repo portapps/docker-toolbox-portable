@@ -18,17 +18,19 @@ type config struct {
 }
 
 type machine struct {
-	Name       string `json:"name"`
-	HostCIDR   string `json:"host_cidr"`
-	CPU        int    `json:"cpu"`
-	Ram        int    `json:"ram"`
-	Disk       int    `json:"disk"`
-	SharedName string `json:"share_name"`
+	Name         string `json:"name"`
+	HostCIDR     string `json:"host_cidr"`
+	CPU          int    `json:"cpu"`
+	Ram          int    `json:"ram"`
+	Disk         int    `json:"disk"`
+	SharedName   string `json:"share_name"`
+	OnExitStop   bool   `json:"on_exit_stop"`
+	OnExitRemove bool   `json:"on_exit_remove"`
 }
 
 func init() {
 	Papp.ID = "docker-toolbox-portable"
-	Papp.Name = "DockerToolbox"
+	Papp.Name = "Docker Toolbox"
 	Init()
 
 	SetConsoleTitle(fmt.Sprintf("%s Portable", Papp.Name))
@@ -50,35 +52,27 @@ func main() {
 	cfgPath := PathJoin(Papp.Path, fmt.Sprintf("%s.json", Papp.ID))
 	cfgDefault := config{
 		Machine: machine{
-			Name:       "default",
-			HostCIDR:   "192.168.99.1/24",
-			CPU:        1,
-			Ram:        1024,
-			Disk:       20000,
-			SharedName: "shared",
+			Name:         "default",
+			HostCIDR:     "192.168.99.1/24",
+			CPU:          1,
+			Ram:          1024,
+			Disk:         20000,
+			SharedName:   "shared",
+			OnExitStop:   false,
+			OnExitRemove: false,
 		},
 	}
 
 	if err = createConfig(cfgPath, cfgDefault, &cfg, oldCfg); err != nil {
 		Log.Fatal(err)
 	}
+	Log.Infof("Config: %v", cfg)
 
 	postInstallGit := PathJoin(Papp.AppPath, "git", "post-install.bat")
 	if _, err := os.Stat(postInstallGit); err == nil {
 		Log.Info("Initializing git...")
-		cmdPostInstallGit, err := ExecCmd(CmdOptions{
-			Command:    "cmd",
-			Args:       []string{"/k", postInstallGit},
-			HideWindow: true,
-		})
-		if err != nil {
-			Log.Errorf("Cannot initializing git: %v", err)
-		}
-		if cmdPostInstallGit.ExitCode != 0 {
-			Log.Errorf(fmt.Sprintf("%d", cmdPostInstallGit.ExitCode))
-			if len(cmdPostInstallGit.Stderr) > 0 {
-				Log.Errorf(fmt.Sprintf("%s\n", cmdPostInstallGit.Stderr))
-			}
+		if err = QuickExecCmd("cmd", []string{"/k", postInstallGit}); err != nil {
+			Log.Errorf("Cannot initialize git: %v", err)
 		}
 	}
 
@@ -109,6 +103,18 @@ func main() {
 	}
 	if _, err = proc.Wait(); err != nil {
 		Log.Fatal(err)
+	}
+
+	var exitArgs []string
+	if cfg.Machine.OnExitRemove {
+		exitArgs = []string{"rm", "-f", cfg.Machine.Name}
+	} else if cfg.Machine.OnExitStop {
+		exitArgs = []string{"stop", cfg.Machine.Name}
+	}
+	if len(exitArgs) > 0 {
+		if err = QuickExecCmd("docker-machine", exitArgs); err != nil {
+			Log.Error(err)
+		}
 	}
 }
 

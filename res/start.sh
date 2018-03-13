@@ -39,7 +39,6 @@ VM_EXISTS_CODE=$?
 set -e
 
 STEP="Checking if machine $MACHINE_NAME exists"
-echo "Machine storage path: ${MACHINE_STORAGE_PATH}"
 if [ $VM_EXISTS_CODE -eq 0 -a ! -z ${MACHINE_STORAGE_PATH} -a ! -d "${MACHINE_STORAGE_PATH}/machines/${MACHINE_NAME}" ]; then
   "${DOCKER_MACHINE}" rm -f "${MACHINE_NAME}" &> /dev/null || :
 fi

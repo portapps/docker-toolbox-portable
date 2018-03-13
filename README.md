@@ -12,7 +12,7 @@
 
 ## About
 
-[DockerToolbox](https://docs.docker.com/toolbox/overview/) portable app made with 🚀 [Portapps](https://github.com/portapps).<br />
+[Docker Toolbox](https://docs.docker.com/toolbox/overview/) portable app made with 🚀 [Portapps](https://github.com/portapps).<br />
 Tested on Windows 7, Windows 8.1 and Windows 10.
 
 ## Requirements
@@ -23,8 +23,8 @@ Tested on Windows 7, Windows 8.1 and Windows 10.
 
 There are different kinds of artifacts :
 
-* `docker-toolbox-portable-win{32,64}-x.x.x-x-setup.exe` : Full portable release of DockerToolbox as a setup. **Recommended way**!
-* `docker-toolbox-portable-win{32,64}-x.x.x-x.7z` : Full portable release of DockerToolbox as a 7z archive.
+* `docker-toolbox-portable-win{32,64}-x.x.x-x-setup.exe` : Full portable release of Docker Toolbox as a setup. **Recommended way**!
+* `docker-toolbox-portable-win{32,64}-x.x.x-x.7z` : Full portable release of Docker Toolbox as a 7z archive.
 * `docker-toolbox-portable-win{32,64}.exe` : Only the portable binary (must be renamed `docker-toolbox-portable.exe`)
 * `DockerToolbox-x.x.x.exe` : The original setup from the [official repository](https://github.com/docker/toolbox/releases).
 
@@ -34,12 +34,12 @@ Install `docker-toolbox-portable-win{32,64}-x.x.x-x-setup.exe` where you want th
 
 ### App already installed
 
-If you have already installed DockerToolbox from the original setup :
+If you have already installed Docker Toolbox from the original setup :
 
 * Stop the virtual machine in VirtualBox
 * Move data located in `%USERPROFILE%\.docker\*` to `data\storage` folder
 
-Run `docker-toolbox-portable.exe` and then you can [remove](https://support.microsoft.com/en-us/instantanswers/ce7ba88b-4e95-4354-b807-35732db36c4d/repair-or-remove-programs) DockerToolbox from your computer.
+Run `docker-toolbox-portable.exe` and then you can [remove](https://support.microsoft.com/en-us/instantanswers/ce7ba88b-4e95-4354-b807-35732db36c4d/repair-or-remove-programs) Docker Toolbox from your computer.
 
 ### Upgrade
 
@@ -57,17 +57,21 @@ A configuration file called `docker-toolbox-portable.json` is generated at first
     "cpu": 1,
     "ram": 1024,
     "disk": 20000,
-    "share_name": "shared"
+    "share_name": "shared",
+    "on_exit_stop": false,
+    "on_exit_remove": false
   }
 }
 ```
 
-* `name` : Name of the virtaul machine (default `default`)
+* `name` : Name of the virtual machine (default `default`)
 * `host_cidr` : Specify the Host Only CIDR (default `192.168.99.1/24`)
 * `cpu` : Number of CPUs for the machine (-1 to use the number of CPUs available ; default `1`)
 * `ram` : Size of memory for host in MB (default `1024`)
 * `disk` : Size of disk for host in MB (default `20000`)
 * `share_name` : Name of the mounted directory (in `data\shared`) to use as volume (default `shared`)
+* `on_exit_stop` : Stop the virtual machine on exit
+* `on_exit_remove` : Remove the virtual machine on exit
 
 ### Mount a volume
 
