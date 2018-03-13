@@ -8,10 +8,16 @@
   revision = "54b4ae679a63f6d6fd5c0009b2471e637eabf784"
 
 [[projects]]
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
+  version = "v0.8.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/portapps/portapps"
   packages = ["."]
-  revision = "7e07d0b5e9bb2a25c51ebd7d31bc827dd694cd78"
+  revision = "e1c8bc5bb189565a1389fe90932aea102d8b6406"
 
 [[projects]]
   branch = "master"
@@ -21,7 +27,7 @@
     "windows/registry",
     "windows/svc/eventlog"
   ]
-  revision = "c28acc882ebcbfbe8ce9f0f14b9ac26ee138dd51"
+  revision = "8c0ece68c28377f4c326d85b94f8df0dace46f80"
 
 [solve-meta]
   analyzer-name = "dep"
