@@ -17,7 +17,7 @@
   branch = "master"
   name = "github.com/portapps/portapps"
   packages = ["."]
-  revision = "e1c8bc5bb189565a1389fe90932aea102d8b6406"
+  revision = "ea29e793642c797556081648b524471d4c4cb154"
 
 [[projects]]
   branch = "master"
@@ -27,7 +27,7 @@
     "windows/registry",
     "windows/svc/eventlog"
   ]
-  revision = "1d206c9fa8975fb4cf00df1dc8bf3283dc24ba0e"
+  revision = "ac767d655b305d4e9612f5f6e33120b9176c4ad4"
 
 [solve-meta]
   analyzer-name = "dep"
