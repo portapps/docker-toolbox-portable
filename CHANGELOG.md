@@ -1,5 +1,9 @@
 # Changelog
 
+## 18.06.0-4 (2018/07/23)
+
+* Upgrade to Docker Toolbox 18.06.0
+
 ## 18.03.0-3 (2018/04/05)
 
 * Upgrade to Docker Toolbox 18.03.0
