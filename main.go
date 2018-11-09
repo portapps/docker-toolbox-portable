@@ -42,7 +42,7 @@ func main() {
 	var oldCfg config
 
 	Papp.AppPath = AppPathJoin("app")
-	Papp.DataPath = AppPathJoin("data")
+	Papp.DataPath = CreateFolder(AppPathJoin("data"))
 	Papp.Process = PathJoin(Papp.AppPath, "git", "bin", "bash.exe")
 	Papp.Args = []string{"--login", "-i", PathJoin(Papp.AppPath, "start.sh")}
 	Papp.WorkingDir = Papp.AppPath
@@ -76,7 +76,7 @@ func main() {
 		}
 	}
 
-	Log.Info("Setting environment...")
+	Log.Info("Setting machine environment...")
 	os.Setenv("MACHINE_NAME", cfg.Machine.Name)
 	os.Setenv("MACHINE_HOST_CIDR", cfg.Machine.HostCIDR)
 	os.Setenv("MACHINE_CPU", strconv.Itoa(cfg.Machine.CPU))
