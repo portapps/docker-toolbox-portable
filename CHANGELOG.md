@@ -1,6 +1,10 @@
 # Changelog
 
-## 18.09.1-7 (2019/12/15)
+## 18.09.1-7 (2019/02/03)
+
+* No more win32 release (Issue #2)
+
+## 18.09.1-7 (2019/01/15)
 
 * Upgrade to Docker Toolbox 18.09.1
 
