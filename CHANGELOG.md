@@ -1,6 +1,10 @@
 # Changelog
 
-## 18.09.1-7 (2019/02/03)
+## 18.09.2-2 (2019/02/14)
+
+* Upgrade to Docker Toolbox 18.09.2 and Git 2.20.1
+
+## 18.09.1-1 (2019/02/03)
 
 * No more win32 release (Issue #2)
 
