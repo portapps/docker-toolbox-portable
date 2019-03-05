@@ -1,5 +1,12 @@
 # Changelog
 
+## 18.09.3-4 (2019/03/05)
+
+* Upgrade to Docker Toolbox 18.09.3 and Git 2.21.0
+
+> :warning: **UPGRADE NOTES**
+> Configuration file structure has changed, see configuration section on [Docker Toolbox portable page](https://portapps.github.io/app/docker-toolbox-portable/) for more info.
+
 ## 18.09.2-2 (2019/02/14)
 
 * Upgrade to Docker Toolbox 18.09.2 and Git 2.20.1
