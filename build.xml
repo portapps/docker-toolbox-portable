@@ -35,7 +35,7 @@
 
     <echo message="Updating post-install.bat for Git..."/>
     <assertfile file="${extract.path2}\git\post-install.bat"/>
-    <replace file="${extract.path2}\git\post-install.bat">
+    <replace file="${extract.path2}\git\post-install.bat" failOnNoReplacements="true">
       <replacefilter token="@DEL post-install.bat" value="@REM @DEL post-install.bat"/>
     </replace>
 
