@@ -1,9 +1,10 @@
-<p align="center"><a href="https://portapps.io/app/docker-toolbox-portable" target="_blank"><img width="100" src="https://github.com/portapps/docker-toolbox-portable/blob/master/res/papp.png"></a></p>
+<p align="center"><a href="https://portapps.io/app/docker-toolbox-portable/" target="_blank"><img width="100" src="https://github.com/portapps/docker-toolbox-portable/blob/master/res/papp.png"></a></p>
 
 <p align="center">
   <a href="https://portapps.io/app/docker-toolbox-portable/#download"><img src="https://img.shields.io/github/release/portapps/docker-toolbox-portable.svg?style=flat-square" alt="GitHub release"></a>
   <a href="https://portapps.io/app/docker-toolbox-portable/#download"><img src="https://img.shields.io/github/downloads/portapps/docker-toolbox-portable/total.svg?style=flat-square" alt="Total downloads"></a>
   <a href="https://travis-ci.com/portapps/docker-toolbox-portable"><img src="https://img.shields.io/travis/com/portapps/docker-toolbox-portable/master.svg?style=flat-square" alt="Build Status"></a>
+  <a href="https://github.com/portapps/portapps"><img src="https://img.shields.io/badge/portapps-1.20.3-479fdb.svg?style=flat-square" alt="Portapps version"></a>
   <a href="https://goreportcard.com/report/github.com/portapps/docker-toolbox-portable"><img src="https://goreportcard.com/badge/github.com/portapps/docker-toolbox-portable?style=flat-square" alt="Go Report"></a>
   <a href="https://www.codacy.com/app/portapps/docker-toolbox-portable"><img src="https://img.shields.io/codacy/grade/439e341359d14857a0ee82f593a995e4.svg?style=flat-square" alt="Code Quality"></a>
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WQD7AQGPDEPSG"><img src="https://img.shields.io/badge/donate-paypal-7057ff.svg?style=flat-square" alt="Donate Paypal"></a>
@@ -12,7 +13,7 @@
 ## About
 
 [Docker Toolbox](https://docs.docker.com/toolbox/overview/) portable app made with 🚀 [Portapps](https://portapps.io).<br />
-Documentation and downloads can be found on https://portapps.io/app/docker-toolbox-portable
+Documentation and downloads can be found on https://portapps.io/app/docker-toolbox-portable/
 
 ## How can I help ?
 
