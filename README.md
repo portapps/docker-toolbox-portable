@@ -12,13 +12,15 @@
 
 ## Notice of Non-Affiliation and Disclaimer
 
-Portapps is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Docker, or any of its subsidiaries or its affiliates. The official Docker website can be found at https://www.docker.com/.
+Portapps is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Docker™, or any of its subsidiaries or its affiliates.
 
-The name Docker® as well as related names, marks, emblems and images are registered trademarks of their respective owners.
+The official Docker™ website can be found at https://www.docker.com/.
+
+The name Docker™ as well as related names, marks, emblems and images are registered trademarks of their respective owners.
 
 ## About
 
-Docker Toolbox portable app made with 🚀 [Portapps](https://portapps.io).<br />
+Docker™ Toolbox portable app made with 🚀 [Portapps](https://portapps.io).<br />
 Documentation and downloads can be found on https://portapps.io/app/docker-toolbox-portable/
 
 ## How can I help ?
