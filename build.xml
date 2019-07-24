@@ -28,7 +28,7 @@
 
     <echo message="Downloading Git ${papp.git.version}..."/>
     <property name="papp.git.file" location="${tmp.path}\PortableGit-${papp.git.version}.7z.exe"/>
-    <get dest="${papp.git.file}" src="${papp.git.url}" skipexisting="false"/>
+    <get dest="${papp.git.file}" src="${papp.git.url}" skipexisting="false" verbose="on"/>
 
     <echo message="Extracting Git..."/>
     <sevenzip-ax src="${papp.git.file}" dest="${extract.path2}\git"/>
