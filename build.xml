@@ -20,7 +20,7 @@
     <echo message="Preparing release..."/>
     <property name="extract.path2" value="${tmp.path}\extract2"/>
     <move todir="${tmp.path}\extract2">
-      <fileset dir="${extract.path}\${innosetup.app}">
+      <fileset dir="${extract.path}\${innosetup.app}" defaultexcludes="no">
         <exclude name="installers/**"/>
         <exclude name="kitematic/**"/>
       </fileset>
@@ -44,7 +44,7 @@
 
     <delete dir="${extract.path}\${innosetup.app}"/>
     <move todir="${extract.path}\${innosetup.app}">
-      <fileset dir="${extract.path2}"/>
+      <fileset dir="${extract.path2}" defaultexcludes="no"/>
     </move>
   </target>
 
