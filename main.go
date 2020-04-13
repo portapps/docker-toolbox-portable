@@ -8,9 +8,10 @@ import (
 	"strconv"
 	"syscall"
 
-	. "github.com/portapps/portapps"
-	"github.com/portapps/portapps/pkg/proc"
-	"github.com/portapps/portapps/pkg/utl"
+	"github.com/portapps/portapps/v2"
+	"github.com/portapps/portapps/v2/pkg/log"
+	"github.com/portapps/portapps/v2/pkg/proc"
+	"github.com/portapps/portapps/v2/pkg/utl"
 )
 
 type config struct {
@@ -29,7 +30,7 @@ type machine struct {
 }
 
 var (
-	app *App
+	app *portapps.App
 	cfg *config
 )
 
@@ -51,8 +52,8 @@ func init() {
 	}
 
 	// Init app
-	if app, err = NewWithCfg("docker-toolbox-portable", "Docker Toolbox", cfg); err != nil {
-		Log.Fatal().Err(err).Msg("Cannot initialize application. See log file for more info.")
+	if app, err = portapps.NewWithCfg("docker-toolbox-portable", "Docker Toolbox", cfg); err != nil {
+		log.Fatal().Err(err).Msg("Cannot initialize application. See log file for more info.")
 	}
 }
 
@@ -70,13 +71,13 @@ func main() {
 
 	postInstallGit := utl.PathJoin(app.AppPath, "git", "post-install.bat")
 	if _, err := os.Stat(postInstallGit); err == nil {
-		Log.Info().Msg("Initializing git...")
+		log.Info().Msg("Initializing git...")
 		if err = proc.QuickCmd("cmd", []string{"/k", postInstallGit}); err != nil {
-			Log.Fatal().Err(err).Msg("Cannot initialize git")
+			log.Fatal().Err(err).Msg("Cannot initialize git")
 		}
 	}
 
-	Log.Info().Msg("Setting machine environment...")
+	log.Info().Msg("Setting machine environment...")
 	utl.OverrideEnv("MACHINE_NAME", cfg.Machine.Name)
 	utl.OverrideEnv("MACHINE_HOST_CIDR", cfg.Machine.HostCIDR)
 	utl.OverrideEnv("MACHINE_CPU", strconv.Itoa(cfg.Machine.CPU))
@@ -86,10 +87,10 @@ func main() {
 	utl.OverrideEnv("MACHINE_SHARED_NAME", cfg.Machine.SharedName)
 	utl.OverrideEnv("MACHINE_SHARED_PATH", sharedPath)
 
-	Log.Info().Msg("Adding app to PATH...")
+	log.Info().Msg("Adding app to PATH...")
 	utl.OverrideEnv("PATH", fmt.Sprintf("%s;%s", app.AppPath, os.Getenv("PATH")))
 
-	Log.Info().Msg("Starting up the shell... ")
+	log.Info().Msg("Starting up the shell... ")
 	pa := os.ProcAttr{
 		Files: []*os.File{os.Stdin, os.Stdout, os.Stderr},
 		Dir:   app.AppPath,
@@ -100,7 +101,7 @@ func main() {
 
 	defer func() {
 		var exitArgs []string
-		Log.Info().Msg("Exiting...")
+		log.Info().Msg("Exiting...")
 
 		if cfg.Machine.OnExitRemove {
 			exitArgs = []string{"rm", "-f", cfg.Machine.Name}
@@ -110,16 +111,16 @@ func main() {
 
 		if len(exitArgs) > 0 {
 			if err := proc.QuickCmd("docker-machine", exitArgs); err != nil {
-				Log.Error().Err(err).Msg("docker-machine command error")
+				log.Error().Err(err).Msg("docker-machine command error")
 			}
 		}
 	}()
 
 	process, err := os.StartProcess(app.Process, []string{}, &pa)
 	if err != nil {
-		Log.Fatal().Err(err).Msg("Process failed")
+		log.Fatal().Err(err).Msg("Process failed")
 	}
 	if _, err := process.Wait(); err != nil {
-		Log.Error().Err(err).Msg("Process failed")
+		log.Error().Err(err).Msg("Process failed")
 	}
 }
